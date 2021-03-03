@@ -66,9 +66,13 @@ const addSections = (sections) => {
   for (const element of sections) {
     const listItem = document.createElement("li");
     const linkElement = document.createElement("a");
+    console.log(element.id);
+    if (element.id === "section1") {
+      linkElement.setAttribute("class", "active");
+    }
     linkElement.innerText = element.getAttribute("data-nav");
     linkElement.setAttribute("href", `#${element.getAttribute("id")}`);
-    linkElement.setAttribute("class", "menu__link");
+    linkElement.classList.add("menu__link");
     listItem.appendChild(linkElement);
     fragment.appendChild(listItem);
   }
@@ -79,21 +83,31 @@ const addSections = (sections) => {
 // Add class 'active' to section when near top of viewport
 const getSectionInViewport = (sections) => {
   const main = document.querySelector("main");
+  //select the current active section
   const sectionInViewport = main.querySelector(".your-active-class");
+  //select the menu link corresponding to the active section
+  const activeMenuLink = navbarList.querySelector(".active");
 
   for (const element of sections) {
     const isSectionInViewport = isInViewport(element);
     if (isSectionInViewport && sectionInViewport !== element) {
       // to reduce number of reflows
       main.style.display = "none";
+      navbarList.style.display = "none";
 
       if (sectionInViewport) {
         sectionInViewport.classList.remove("your-active-class");
+        activeMenuLink.classList.remove("active");
       }
 
+      // add active classes to the new section and menu link
       element.classList.add("your-active-class");
+      const navLink = navbarList.querySelector(`a[href="#${element.id}"]`);
+      navLink.classList.add("active");
+
       // to reduce number of reflows
       main.style.display = "block";
+      navbarList.style.display = "block";
       break;
     }
   }

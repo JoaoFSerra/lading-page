@@ -82,6 +82,10 @@ section {
   text-decoration: none;
   color: #000;
 }
+.navbar__menu .active {
+  text-decoration: underline;
+  color: rgb(41, 73, 110);
+}
 
 .navbar__menu .menu__link:hover {
   background: #333;
