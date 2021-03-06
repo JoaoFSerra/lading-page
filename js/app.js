@@ -66,10 +66,12 @@ const addSections = (sections) => {
   for (const element of sections) {
     const listItem = document.createElement("li");
     const linkElement = document.createElement("a");
-    console.log(element.id);
+
+    // add active to the menu link corresponding to section1
     if (element.id === "section1") {
       linkElement.setAttribute("class", "active");
     }
+
     linkElement.innerText = element.getAttribute("data-nav");
     linkElement.setAttribute("href", `#${element.getAttribute("id")}`);
     linkElement.classList.add("menu__link");
